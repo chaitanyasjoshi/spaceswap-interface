@@ -1,0 +1,27 @@
+<header class="flex justify-center border-b-1 border-neutral-800">
+    <div class="w-2/3 h-20 flex items-center justify-between py-2">
+        <!-- top navigation -->
+        <div class="flex items-center justify-start gap-4">
+            <div class="flex items-center cursor-pointer mr-2" [routerLink]="['/']">
+                <i class="material-icons text-green text-4xl">swap_vertical_circle</i>
+                <div class="font-bold text-green text-2xl">SpaceSwap</div>
+            </div>
+            <button [routerLink]="['/swap']" routerLinkActive="active-link" class="btn-menu">
+                <!-- <i class="material-icons mr-1">swap_vertical_circle</i> -->
+                Swap
+            </button>
+            <button [routerLink]="['/pool']" routerLinkActive="active-link" class="btn-menu">
+                <!-- <i class="material-icons mr-1">save_alt</i> -->
+                Liquidity
+            </button>
+        </div>
+
+        <!-- wallet -->
+        <div>
+            <app-wallet></app-wallet>
+        </div>
+    </div>
+</header>
+
+<!--main-->
+<router-outlet></router-outlet>
