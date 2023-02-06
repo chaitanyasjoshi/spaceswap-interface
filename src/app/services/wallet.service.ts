@@ -4,8 +4,8 @@ import { ChainId, ContractAddresses } from '../app.constant';
 const ERC20 = require('../../contracts/ERC20Mock.json');
 
 export interface WalletBalance {
-    balance: number,
-    currency: string
+    balance: number;
+    currency: string;
 }
 
 @Injectable({
@@ -41,19 +41,8 @@ export class WalletService {
         return this._address;
     }
 
-    async getBalance() : Promise<WalletBalance> {
-        
-        const { chainId } = await this._provider.getNetwork();
-        if (chainId == ChainId.GODWOKEN_TESTNET) {
-            const tokenContract = new Contract(ContractAddresses.pCKB, ERC20.abi, this._provider.getSigner());
-            const balanceRaw = await tokenContract.balanceOf(this._address);
-            const symbol = await tokenContract.symbol();
-            const decimals = await tokenContract.decimals();
-            const balance = ethers.utils.formatUnits(balanceRaw, decimals);
-            return { balance: Number(balance), currency: symbol } ;
-        } else {
-            const balance = await this._provider.getBalance(this._address);
-            return { balance: Number(balance), currency: 'ETH' } ;
-        }
+    async getBalance(): Promise<WalletBalance> {
+        const balance = await this._provider.getBalance(this._address);
+        return { balance: Number(balance), currency: 'ETH' };
     }
 }
